@@ -93,7 +93,7 @@ function lesson1(){
     //
         fs.mkdir(path.join(__dirname,'folder','folder4'),(err)=>{//создали папку
             if (err) throw new Error(err.message);
-        }) //создает папку, ,
+        }) //создает папку,
 
         fs.rmdir(path.join(__dirname,'folder','folder4'),(err)=>{//удалили папку
             if (err) throw new Error(err.message);
