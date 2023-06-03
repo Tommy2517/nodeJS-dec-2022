@@ -26,7 +26,7 @@ const hw1 = path.join(__dirname,'homeWorks','hw1',)
 //     fs.mkdir(path.join(hw1,'dir'+i,),(err)=>{
 //         if (err) throw new Error(err.message);
 //     })
-//     fs.writeFile(path.join(hw1,'file'+i),'hola',(err)=>{
+//     fs.writeFile(path.join(hw1,'file'+i+'.txt'),'hola',(err)=>{
 //         if (err) throw new Error(err.message);
 //     })
 // }
