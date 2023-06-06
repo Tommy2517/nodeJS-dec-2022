@@ -95,7 +95,7 @@ function lesson1(){
             if (err) throw new Error(err.message);
         }) //создает папку, ,
 
-        fs.rmdir(path.join(__dirname,'folder','folder4'),(err)=>{//удалили папку
+        fs.rm(path.join(__dirname,'folder','folder4'),(err)=>{//удалили папку
             if (err) throw new Error(err.message);
         })//удаляет папку
 }
