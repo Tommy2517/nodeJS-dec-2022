@@ -148,14 +148,8 @@ const modifyUsers = async (newUser)=>{
 app.post('/users',(req, res)=>{
     modifyUsers(req.body).then()
     console.log(req.body);
-    // users.push(req.body)
-
-
-
     res.status(201).json({message:'user created'})
-
 })
-
 
 app.get('/users', (req, res) => {//req - то что получили от клиента; res - то что возвращаем клиенту;
     //обрабатываем полученный запрос req
@@ -243,7 +237,7 @@ app.listen(PORT, () => { // listen - метод обращается к app и �
 
 
 
-
+//комитим лесон 2хв и переключаемся
 
 
 
