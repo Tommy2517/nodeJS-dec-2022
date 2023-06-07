@@ -16,8 +16,7 @@
     "@types/express": "^4.17.17",
     "nodemon": "^2.0.22",
     "rimraf": "^5.0.1",
-    "ts-node": "^10.9.1",
-    "tsc-watch": "^6.0.4"
-  },
-  "description": ""
+    "tsc-watch": "^6.0.4",
+    "ts-node": "^10.9.1"
+  }
 }

@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-
+// import path from 'path';
 import express from 'express';
 import {Request,Response} from 'express';
 
@@ -80,7 +80,7 @@ app.get('/users', (req:Request, res:Response) => {//req - то что получ
 app.get('/users/:id',(req:Request, res:Response)=>{ //принимаем реквест
     const { id }=req.params;//деструктурируем получаем значение ключа
     // modifyUsers2(id).then((value)=>{
-    //     res.status(200).json(value);//возвращаем респонс с объектом чей id совпадает с реквестом
+        res.status(200).json(id);//возвращаем респонс с объектом чей id совпадает с реквестом
     // })
 })
 app.get('users/:id',(req:Request, res:Response) =>{
@@ -96,8 +96,8 @@ app.post('/users',(req:Request, res:Response)=>{
 
 const PORT = 5001;//идентификатор процесса на компьютере
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`)
         })
 
 
