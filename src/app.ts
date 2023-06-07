@@ -1,17 +1,17 @@
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 // import path from 'path';
 import express from 'express';
-import {Request,Response} from 'express';
+// import {Request,Response} from 'express';
 
-
+//
 const app = express()
-const port = 3000
-
-
-
-app.use(express.json());//что то читает, мб джейсон, обязателен.
-app.use(express.urlencoded({extended: true}));//так же
+// const port = 3000
+//
+//
+//
+// app.use(express.json());//что то читает, мб джейсон, обязателен.
+// app.use(express.urlencoded({extended: true}));//так же
 
 // const reader = () => {
 //     return new Promise((resolve,reject)=>{
@@ -67,32 +67,32 @@ app.use(express.urlencoded({extended: true}));//так же
 //     }
 // }
 
-
-app.get('/users', (req:Request, res:Response) => {//req - то что получили от клиента; res - то что возвращаем клиенту;
-    // modifyUsers2().then((users) =>{
-    req.body
-        res.status(200).json('users')
-    //     console.log(users)
-    // })
-})
-
-
-app.get('/users/:id',(req:Request, res:Response)=>{ //принимаем реквест
-    const { id }=req.params;//деструктурируем получаем значение ключа
-    // modifyUsers2(id).then((value)=>{
-        res.status(200).json(id);//возвращаем респонс с объектом чей id совпадает с реквестом
-    // })
-})
-app.get('users/:id',(req:Request, res:Response) =>{
-    // modifyUsers2(req.params).then()
-    res.status(200)
-})
-
-app.post('/users',(req:Request, res:Response)=>{
-    // modifyUsers(req.body).then()
-    console.log(req.body);
-    res.status(201).json({message:'user created'})
-})
+//
+// app.get('/users', (req:Request, res:Response) => {//req - то что получили от клиента; res - то что возвращаем клиенту;
+//     // modifyUsers2().then((users) =>{
+//     req.body
+//         res.status(200).json('users')
+//     //     console.log(users)
+//     // })
+// })
+//
+//
+// app.get('/users/:id',(req:Request, res:Response)=>{ //принимаем реквест
+//     const { id }=req.params;//деструктурируем получаем значение ключа
+//     // modifyUsers2(id).then((value)=>{
+//         res.status(200).json(id);//возвращаем респонс с объектом чей id совпадает с реквестом
+//     // })
+// })
+// app.get('users/:id',(req:Request, res:Response) =>{
+//     // modifyUsers2(req.params).then()
+//     res.status(200)
+// })
+//
+// app.post('/users',(req:Request, res:Response)=>{
+//     // modifyUsers(req.body).then()
+//     console.log(req.body);
+//     res.status(201).json({message:'user created'})
+// })
 
 const PORT = 5001;//идентификатор процесса на компьютере
 
@@ -101,3 +101,5 @@ app.listen(PORT, () => {
         })
 
 
+
+//25 мин рассказывается коротко о том что тут проделанно
