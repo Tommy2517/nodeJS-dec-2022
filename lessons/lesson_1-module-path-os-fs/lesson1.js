@@ -25,7 +25,7 @@ function lesson1(){
     //     console.log('lesson1')
     //     console.log(__dirname); //возвращает путь к директории в которой находится файл запустивший функцию
     //     console.log(__filename);//возвращает путь к файлу (включительно) запустившему конкретную функцию
-    //     console.log(process.cwd()); //CWD - Current working directory путь к директории файла который запускает программу (app.js)
+    //     console.log(process.cwd()); //CWD - Current working directory путь к директории файла который запускает программу (app.ts)
     //
     //
     // // библиотека path
