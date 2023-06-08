@@ -1,9 +1,9 @@
 # Default ignored files
-../dist
-../node_modules
+/dist
+/node_modules
 
-../.env
+/.env
 
-../.idea
-../.idea/*
-../.idea/**
+/.idea
+/.idea/*
+/.idea/**
