@@ -26,7 +26,7 @@ export class UserValidator {
   });
   //статический метод для того что бы не создавать экземпляр класса, а напрямую обращаться к методам
   static update = Joi.object({
-    firstname: this.firstname,
+    name: this.firstname,
     age: this.age,
     gender: this.gender,
     email: this.email,
