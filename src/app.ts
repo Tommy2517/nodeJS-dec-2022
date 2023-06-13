@@ -26,3 +26,5 @@ app.listen(configs.PORT, () => {
   mongoose.connect(configs.DB_URL);
   console.log(`Example app listening on port ${configs.PORT}`);
 });
+
+//якось так
