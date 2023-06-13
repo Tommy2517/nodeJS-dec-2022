@@ -11,6 +11,7 @@ app.use(express.json()); //что то читает, мб джейсон, обя
 app.use(express.urlencoded({ extended: true })); //так же
 
 app.use("/users", userRouter);
+
 app.use((err: ApiError, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
   return res.status(status).json({
