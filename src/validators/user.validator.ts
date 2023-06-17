@@ -33,8 +33,7 @@ export class UserValidator {
     password: this.password,
   });
   static login = Joi.object({
-    password: this.password,
-    email: this.email,
-    //TODO = delete or upgrade;
+    password: this.password.required(),
+    email: this.email.required(),
   });
 }

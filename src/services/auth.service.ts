@@ -25,7 +25,6 @@ class AuthService {
   ): Promise<ITokensPair> {
     try {
       user = await User.findOne({ email: credentials.email });
-      console.log(user)
       const isMatched = await passwordService.compare(
         credentials.password,
         user.password

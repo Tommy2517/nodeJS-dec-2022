@@ -20,7 +20,11 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
-    password: {},
+    password: {
+      type: String,
+      required: true,
+      // select: false,
+    },
   },
   {
     versionKey: false,
