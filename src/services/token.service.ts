@@ -1,19 +1,29 @@
 import * as jwt from "jsonwebtoken";
 
-import { ITokensPair } from "../types/token.types";
+import { configs } from "../configs/config";
+import { ApiError } from "../errors";
+import { ITokenPayload, ITokensPair } from "../types/token.types";
 
 class TokenService {
-  public generateTokenPair(
-    payload: Record<string, string | number>
-  ): ITokensPair {
-    const accessToken = jwt.sign(payload, "jwtAccess", { expiresIn: "15m" }); //life time access
-    const refreshToken = jwt.sign(payload, "jwtRefresh", { expiresIn: "30d" }); //life time refresh
+  public generateTokenPair(payload: ITokenPayload): ITokensPair {
+    const accessToken = jwt.sign(payload, configs.JWT_ACCESS_SECRET, {
+      expiresIn: "15s",
+    }); //life time access
+    const refreshToken = jwt.sign(payload, configs.JWT_REFRESH_SECRET, {
+      expiresIn: "30d",
+    }); //life time refresh
 
     return {
       accessToken,
       refreshToken,
     };
   }
+  public checkToken(token: string): ITokenPayload {
+    try {
+      return jwt.verify(token, configs.JWT_REFRESH_SECRET) as ITokenPayload;
+    } catch (e) {
+      throw new ApiError("Token not valid", 401);
+    }
+  }
 }
-
 export const tokenService = new TokenService();

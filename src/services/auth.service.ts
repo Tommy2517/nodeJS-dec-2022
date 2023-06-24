@@ -24,7 +24,6 @@ class AuthService {
     user: IUser
   ): Promise<ITokensPair> {
     try {
-      user = await User.findOne({ email: credentials.email });
       const isMatched = await passwordService.compare(
         credentials.password,
         user.password
@@ -32,8 +31,10 @@ class AuthService {
       if (!isMatched) {
         throw new ApiError("Invalid email or password", 401);
       }
+
       const tokenPair = await tokenService.generateTokenPair({
         _id: user._id,
+        email: user.email,
       });
 
       await Token.create({
