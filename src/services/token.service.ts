@@ -8,10 +8,10 @@ class TokenService {
   public generateTokenPair(payload: ITokenPayload): ITokensPair {
     const accessToken = jwt.sign(payload, configs.JWT_ACCESS_SECRET, {
       expiresIn: "15s",
-    }); //life time access
+    }); //lifetime access
     const refreshToken = jwt.sign(payload, configs.JWT_REFRESH_SECRET, {
       expiresIn: "30d",
-    }); //life time refresh
+    }); //lifetime refresh
 
     return {
       accessToken,
@@ -20,7 +20,7 @@ class TokenService {
   }
   public checkToken(token: string): ITokenPayload {
     try {
-      return jwt.verify(token, configs.JWT_REFRESH_SECRET) as ITokenPayload;
+      return jwt.verify(token, configs.JWT_ACCESS_SECRET) as ITokenPayload;
     } catch (e) {
       throw new ApiError("Token not valid", 401);
     }
