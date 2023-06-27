@@ -4,6 +4,7 @@ import { authController } from "../controllers/auth.controller";
 import { commonMiddleware, userMiddleware } from "../middlewares";
 import { ICredentials } from "../types/token.types";
 import { UserValidator } from "../validators";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -18,6 +19,11 @@ router.post(
   commonMiddleware.isBodyValid(UserValidator.login),
   userMiddleware.isUserExist<ICredentials>("email"),
   authController.login
+);
+router.post(
+  "/refresh",
+  authMiddleware.checkRefreshToken,
+  authController.refresh
 );
 
 export const authRouter = router;
