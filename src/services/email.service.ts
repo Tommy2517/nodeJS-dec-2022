@@ -2,9 +2,9 @@ import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import * as path from "path";
 
+import { configs } from "../configs/config";
 import { allTemplates } from "../constants/email.constants";
 import { EEmailActions } from "../enums/email.enum";
-import {configs} from "../configs/config";
 
 class EmailService {
   private transporter;

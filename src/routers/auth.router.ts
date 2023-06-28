@@ -2,9 +2,9 @@ import { Router } from "express";
 
 import { authController } from "../controllers/auth.controller";
 import { commonMiddleware, userMiddleware } from "../middlewares";
+import { authMiddleware } from "../middlewares/auth.middleware";
 import { ICredentials } from "../types/token.types";
 import { UserValidator } from "../validators";
-import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -20,6 +20,14 @@ router.post(
   userMiddleware.isUserExist<ICredentials>("email"),
   authController.login
 );
+
+router.post(
+  "/changePassword",
+  commonMiddleware.isBodyValid(UserValidator.changePassword),
+  authMiddleware.checkAccessToken,
+  authController.changePassword
+);
+
 router.post(
   "/refresh",
   authMiddleware.checkRefreshToken,

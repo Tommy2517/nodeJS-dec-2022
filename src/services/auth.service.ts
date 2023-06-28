@@ -1,5 +1,8 @@
+import { hash } from "bcrypt";
+
 import { EEmailActions } from "../enums/email.enum";
 import { ApiError } from "../errors";
+import { OldPassword } from "../models/OldPassword.model";
 import { Token } from "../models/Token.model";
 import { User } from "../models/User.mode";
 import { ICredentials, ITokenPayload, ITokensPair } from "../types/token.types";
@@ -37,7 +40,7 @@ class AuthService {
 
       const tokenPair = await tokenService.generateTokenPair({
         _id: user._id,
-        email: user.email,
+        name: user.name,
       });
 
       await Token.create({
@@ -63,6 +66,44 @@ class AuthService {
       ]);
 
       return tokensPair;
+    } catch (e) {
+      throw new ApiError(e.message, e.status);
+    }
+  }
+
+  public async changePassword(
+    dto: { newPassword: string; oldPassword: string },
+    userId: string
+  ): Promise<void> {
+    try {
+      const oldPasswords = await OldPassword.find({ _userId: userId });
+      await Promise.all(
+        oldPasswords.map(async ({ password: hash }) => {
+          const isMatched = await passwordService.compare(
+            dto.oldPassword,
+            hash
+          );
+          if (isMatched) {
+            throw new ApiError("Wrong odl password", 400);
+          }
+        })
+      );
+
+      const user = await User.findById(userId).select("password");
+
+      const isMatched = await passwordService.compare(
+        dto.oldPassword,
+        user.password
+      );
+      if (!isMatched) {
+        throw new ApiError("Wrong odl password", 400);
+      }
+
+      const newHash = await passwordService.hash(dto.newPassword);
+      await Promise.all([
+        OldPassword.create({ password: user.password, _userId: userId }),
+        await User.updateOne({ _id: userId }, { password: newHash }),
+      ]);
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

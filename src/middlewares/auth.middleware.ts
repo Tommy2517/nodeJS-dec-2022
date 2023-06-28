@@ -47,12 +47,11 @@ class AuthMiddleware {
 
       const entity = await Token.findOne({ refreshToken });
       if (!entity) {
-        console.log(refreshToken);
         throw new ApiError("token not valid", 401);
       }
 
       req.res.locals.oldTokenPair = entity;
-      req.res.locals.tokenPayload = payload;
+      req.res.locals.tokenPayload = { name: payload.name, _id: payload._id };
       next();
     } catch (e) {
       next(e);
