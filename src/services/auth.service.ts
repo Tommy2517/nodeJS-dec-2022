@@ -1,7 +1,9 @@
-import { hash } from "bcrypt";
+import { Types } from "mongoose";
 
+import { EActionTokenTypes } from "../enums/action-toke-type.enum";
 import { EEmailActions } from "../enums/email.enum";
 import { ApiError } from "../errors";
+import { Action } from "../models/Action.model";
 import { OldPassword } from "../models/OldPassword.model";
 import { Token } from "../models/Token.model";
 import { User } from "../models/User.mode";
@@ -104,6 +106,23 @@ class AuthService {
         OldPassword.create({ password: user.password, _userId: userId }),
         await User.updateOne({ _id: userId }, { password: newHash }),
       ]);
+    } catch (e) {
+      throw new ApiError(e.message, e.status);
+    }
+  }
+
+  public async forgotPassword(userId: Types.ObjectId, email: string) {
+    try {
+      const actionToken = tokenService.generateActionToken(
+        { _id: userId },
+        EActionTokenTypes.Forgot
+      );
+      await Action.create({
+        actionToken,
+        tokenType: EActionTokenTypes.Forgot,
+        _userId: userId,
+      });
+      await emailService.sendMail(email, EEmailActions.FORGOT_PASSWORD, );
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

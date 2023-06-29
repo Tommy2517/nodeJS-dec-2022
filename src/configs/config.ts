@@ -8,6 +8,8 @@ export const configs = {
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
 
+  JWT_FORGOT_SECRET: process.env.JWT_FORGOT_SECRET,
+
   SECRET_SALT: process.env.SECRET_SALT,
 
   NO_REPLY_EMAIL: process.env.NO_REPLY_EMAIL,

@@ -43,9 +43,7 @@ class AuthController {
       const { _id: userId } = req.res.locals.tokenPayload as ITokenPayload;
       await authService.changePassword(req.body, userId);
 
-      return res.sendStatus(201).json({
-
-      });
+      return res.sendStatus(201).json({});
     } catch (e) {
       next(e);
     }
@@ -63,6 +61,15 @@ class AuthController {
       const tokensPair = await authService.refresh(oldTokenPair, tokenPayload);
 
       return res.status(200).json(tokensPair);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async forgotPassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { user } = res.locals;
+      await authService.forgotPassword(user._id, req.body.email);
     } catch (e) {
       next(e);
     }

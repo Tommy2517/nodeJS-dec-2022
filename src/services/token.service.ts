@@ -1,6 +1,7 @@
 import * as jwt from "jsonwebtoken";
 
 import { configs } from "../configs/config";
+import { EActionTokenTypes } from "../enums/action-toke-type.enum";
 import { ETokenType } from "../enums/token-type";
 import { ApiError } from "../errors";
 import { ITokenPayload, ITokensPair } from "../types/token.types";
@@ -32,6 +33,25 @@ class TokenService {
           break;
       }
       return jwt.verify(token, secret) as ITokenPayload;
+    } catch (e) {
+      throw new ApiError("Token not valid", 401);
+    }
+  }
+
+  public generateActionToken(
+    payload: ITokenPayload,
+    tokenType: EActionTokenTypes
+  ): string {
+    try {
+      let secret: string;
+
+      switch (tokenType) {
+        case EActionTokenTypes.Forgot:
+          secret = configs.JWT_ACCESS_SECRET;
+          break;
+      }
+
+      return jwt.sign(payload, secret, { expiresIn: "7d" });
     } catch (e) {
       throw new ApiError("Token not valid", 401);
     }
