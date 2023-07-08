@@ -51,7 +51,7 @@ router.post(
 );
 
 router.put(
-  "/forgot:token",
+  "/forgot/:token",
   commonMiddleware.isBodyValid(UserValidator.setForgotPassword),
   authMiddleware.checkActionToken(EActionTokenTypes.Forgot),
   authController.setForgotPassword
