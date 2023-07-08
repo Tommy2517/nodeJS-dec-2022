@@ -24,6 +24,7 @@ router.put(
 router.delete(
   "/:userId",
   commonMiddleware.isIdValid("userId"),
+  authMiddleware.checkAccessToken,
   userController.deleteById
 );
 export const userRouter = router;

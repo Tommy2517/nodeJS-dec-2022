@@ -20,6 +20,7 @@ class TokenService {
       refreshToken,
     };
   }
+
   public checkToken(token: string, type: ETokenType): ITokenPayload {
     try {
       let secret: string;
@@ -34,7 +35,7 @@ class TokenService {
       }
       return jwt.verify(token, secret) as ITokenPayload;
     } catch (e) {
-      throw new ApiError("Token not valid", 401);
+      throw new ApiError("T1oken not valid", 401);
     }
   }
 
@@ -56,5 +57,27 @@ class TokenService {
       throw new ApiError("Token not valid", 401);
     }
   }
+
+  public checkActionToken(
+    token: string,
+    tokenType: EActionTokenTypes
+  ): ITokenPayload {
+    try {
+      let secret: string;
+
+      switch (tokenType) {
+        case EActionTokenTypes.Forgot:
+          secret = configs.JWT_ACCESS_SECRET;
+          break;
+        case EActionTokenTypes.Activate:
+          secret = configs.JWT_ACTIVATE_SECRET;
+          break;
+      }
+      return jwt.verify(token, secret) as ITokenPayload;
+    } catch (e) {
+      throw new ApiError("Token not valid", 401);
+    }
+  }
 }
+
 export const tokenService = new TokenService();
